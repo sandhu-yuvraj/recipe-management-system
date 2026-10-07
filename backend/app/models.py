@@ -29,7 +29,7 @@ class Recipe(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     owner: Mapped[User] = relationship(back_populates="recipes")
-    components: Mapped[list["RecipeComponent"]] = relationship(back_populates="recipe", cascade="all, delete-orphan")
+    components: Mapped[list["RecipeComponent"]] = relationship(back_populates="recipe", foreign_keys="RecipeComponent.recipe_id", cascade="all, delete-orphan")
 
 
 class Ingredient(Base):
